@@ -3,106 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrap Metal Selling Calculator</title>
+    <title>Chop Shop Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #000;
             color: #fff;
-        }
-        
-        .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            font-family: Arial, sans-serif;
+            text-align: center;
             padding: 20px;
-            margin: 50px auto;
-            max-width: 600px;
-            border-radius: 10px;
         }
-        
-        h1 {
-            text-align: center;
-        }
-        
-        form {
-            text-align: center;
-        }
-        
-        input[type="number"] {
-            padding: 10px;
-            margin: 10px;
-        }
-        
-        input[type="submit"] {
-            padding: 10px 20px;
+        #calculator {
+            max-width: 400px;
+            margin: 0 auto;
             background-color: #333;
-            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
             cursor: pointer;
         }
-        
-        input[type="submit"]:hover {
-            background-color: #555;
+        #total {
+            margin-top: 20px;
+            font-size: 18px;
         }
-        
-        .youtube-button {
-            text-align: center;
+        #youtube-button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
             margin-top: 20px;
         }
-        
-        .youtube-button a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #FF0000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        
-        .youtube-button a:hover {
-            background-color: #CC0000;
+        #youtube-button:hover {
+            background-color: #cc0000;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Scrap Metal Selling Calculator</h1>
-        <form id="calculatorForm" onsubmit="calculatePrice(event)">
-            <label for="scrapQuantity">Scrap Metal ($30):</label>
-            <input type="number" id="scrapQuantity" name="scrapQuantity" min="0">
-            <br><br>
-            <label for="aluminumQuantity">Aluminum ($50):</label>
-            <input type="number" id="aluminumQuantity" name="aluminumQuantity" min="0">
-            <br><br>
-            <label for="steelQuantity">Steel ($60):</label>
-            <input type="number" id="steelQuantity" name="steelQuantity" min="0">
-            <br><br>
-            <input type="submit" value="Calculate Price">
+    <div id="calculator">
+        <h2>Chop Shop Calculator</h2>
+        <form id="calcForm">
+            <label for="scrap">Scrap Metal ($30/piece):</label>
+            <input type="number" id="scrap" min="0" value="0"><br>
+            <label for="aluminum">Aluminum ($50/piece):</label>
+            <input type="number" id="aluminum" min="0" value="0"><br>
+            <label for="steel">Steel ($60/piece):</label>
+            <input type="number" id="steel" min="0" value="0"><br>
+            <label for="glass">Glass ($20/piece):</label>
+            <input type="number" id="glass" min="0" value="0"><br>
+            <label for="rubber">Rubber ($8/piece):</label>
+            <input type="number" id="rubber" min="0" value="0"><br>
+            <input type="submit" value="Calculate Total">
         </form>
-        <div id="priceDisplay"></div>
+        <div id="total"></div>
     </div>
-
-    <div class="youtube-button">
-        <a href="https://www.youtube.com/channel/UCFb3x4PkPKPBE7h2W4x9PVg" target="_blank">Visit My YouTube Channel</a>
-    </div>
+    <a id="youtube-button" href="https://youtube.com/@deadraskal?si=fSo_EggnLEbbSciS" target="_blank">Visit My YouTube Channel</a>
 
     <script>
-        function calculatePrice(event) {
-            event.preventDefault();
-            const scrapQuantity = parseFloat(document.getElementById('scrapQuantity').value) || 0;
-            const aluminumQuantity = parseFloat(document.getElementById('aluminumQuantity').value) || 0;
-            const steelQuantity = parseFloat(document.getElementById('steelQuantity').value) || 0;
-            
-            const scrapPrice = 30;
-            const aluminumPrice = 50;
-            const steelPrice = 60;
+        const calcForm = document.getElementById('calcForm');
+        const totalDisplay = document.getElementById('total');
 
-            const totalPrice = (scrapQuantity * scrapPrice) + (aluminumQuantity * aluminumPrice) + (steelQuantity * steelPrice);
-            const priceDisplay = document.getElementById('priceDisplay');
-            priceDisplay.innerHTML = `<p>Total Price: $${totalPrice}</p>`;
-        }
+        calcForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const scrap = parseInt(document.getElementById('scrap').value);
+            const aluminum = parseInt(document.getElementById('aluminum').value);
+            const steel = parseInt(document.getElementById('steel').value);
+            const glass = parseInt(document.getElementById('glass').value);
+            const rubber = parseInt(document.getElementById('rubber').value);
+
+            const scrapTotal = scrap * 30;
+            const aluminumTotal = aluminum * 50;
+            const steelTotal = steel * 60;
+            const glassTotal = glass * 20;
+            const rubberTotal = rubber * 8;
+            const total = scrapTotal + aluminumTotal + steelTotal + glassTotal + rubberTotal;
+
+            totalDisplay.innerHTML = `
+                <p>Scrap Metal Total: $${scrapTotal}</p>
+                <p>Aluminum Total: $${aluminumTotal}</p>
+                <p>Steel Total: $${steelTotal}</p>
+                <p>Glass Total: $${glassTotal}</p>
+                <p>Rubber Total: $${rubberTotal}</p>
+                <hr>
+                <p>Total: $${total}</p>
+            `;
+        });
     </script>
 </body>
 </html>
