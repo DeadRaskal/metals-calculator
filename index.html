@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap Metal Selling Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        form {
+            text-align: center;
+        }
+        
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        
+        .youtube-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .youtube-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF0000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .youtube-button a:hover {
+            background-color: #CC0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scrap Metal Selling Calculator</h1>
+        <form id="calculatorForm" onsubmit="calculatePrice(event)">
+            <label for="scrapQuantity">Scrap Metal ($30):</label>
+            <input type="number" id="scrapQuantity" name="scrapQuantity" min="0">
+            <br><br>
+            <label for="aluminumQuantity">Aluminum ($50):</label>
+            <input type="number" id="aluminumQuantity" name="aluminumQuantity" min="0">
+            <br><br>
+            <label for="steelQuantity">Steel ($60):</label>
+            <input type="number" id="steelQuantity" name="steelQuantity" min="0">
+            <br><br>
+            <input type="submit" value="Calculate Price">
+        </form>
+        <div id="priceDisplay"></div>
+    </div>
+
+    <div class="youtube-button">
+        <a href="https://www.youtube.com/channel/UCFb3x4PkPKPBE7h2W4x9PVg" target="_blank">Visit My YouTube Channel</a>
+    </div>
+
+    <script>
+        function calculatePrice(event) {
+            event.preventDefault();
+            const scrapQuantity = parseFloat(document.getElementById('scrapQuantity').value) || 0;
+            const aluminumQuantity = parseFloat(document.getElementById('aluminumQuantity').value) || 0;
+            const steelQuantity = parseFloat(document.getElementById('steelQuantity').value) || 0;
+            
+            const scrapPrice = 30;
+            const aluminumPrice = 50;
+            const steelPrice = 60;
+
+            const totalPrice = (scrapQuantity * scrapPrice) + (aluminumQuantity * aluminumPrice) + (steelQuantity * steelPrice);
+            const priceDisplay = document.getElementById('priceDisplay');
+            priceDisplay.innerHTML = `<p>Total Price: $${totalPrice}</p>`;
+        }
+    </script>
+</body>
+</html>
